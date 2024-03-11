@@ -1,4 +1,3 @@
-
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -28,7 +27,7 @@ class Node {
     }    
 };
 
-void newTree(){
+vector<Node> newTree(){
   int n;
   cin >> n;
   
@@ -41,17 +40,45 @@ void newTree(){
       Nodos[child_index].key = child_index;  //Nodo raiz
     }
     else{
+      Nodos[child_index].key = child_index;
       Nodos[child_index].setParent(&Nodos[parent_index]);  
     }  
+  }
+  return Nodos;
+}
+
+void monstrarArbol(vector<Node> A){
+
+  cout<<"IMPRMIENDO ARBOL: "<<endl;
+  for (int i = 0; i < A.size(); i++)
+  {
+    cout<<"Padre: "<<i<<endl;
+    vector<Node *> hijos = A[i].children;
+    if(A[i].parent == NULL)
+      cout<<"Raiz"<<endl;
+
+    if(hijos.size() != 0){
+      cout<<"Hijos: ";
+      for (int h = 0; h < hijos.size(); h++)
+      {
+        cout<<hijos[h]->key<<" ";
+      }
+      cout<<endl;
+    }
+    else
+      cout<<"Hoja"<<endl;
   }  
 }
 
-
+void Height(vector<Node> A){
+  //
+}
 
 int main()
 {
-  newTree();
-  
+  vector<Node> arbol;
+  arbol = newTree();
+  monstrarArbol(arbol);
   
   
   return 0;
