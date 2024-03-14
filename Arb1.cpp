@@ -5,6 +5,8 @@ using std::endl;
 
 #include <vector>  //Estructura de dato vector, con push etc... ya implementado
 using std::vector;
+using std::max;  //Es para obtener el maximo  !Investigar!
+#include <algorithm>  //Es una libreria con algoritmo optimos
 
 
 class Node;
@@ -70,8 +72,22 @@ void monstrarArbol(vector<Node> A){
   }  
 }
 
-void Height(vector<Node> A){
-  //
+int  Height(vector<Node> A){ //Vector de hojas ?
+  int altura;
+  for(int indice_hoja = 0 ; indice_hoja<A.size() ; indice_hoja++)
+  {
+    int mi_altura=0;  // Para cada nodo calculamos la altura de ese nodo 
+    for(Node *v= &A[indice_hoja] ; v != NULL ; v = v->parent){
+      mi_altura++; //La altura "del nodo" es decir desde el nodo hasta la raiz  
+    }
+  if( mi_altura > altura ){
+    altura = max(altura,mi_altura);
+    altura=mi_altura;
+  } 
+  }
+  
+  
+  return altura;
 }
 
 int main()
@@ -79,7 +95,10 @@ int main()
   vector<Node> arbol;
   arbol = newTree();
   monstrarArbol(arbol);
-  
+  cout<<" La altura del arbol  es :  "<< Height(arbol)<<endl;
   
   return 0;
 }
+
+//Recomendacion utilizar libreria vector
+//Libreria <algorithm>
